@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полноэкранные Часы и Дата</title>
+    <style>
+        body {
+            background-color: black;
+            color: darkviolet;
+            font-family: Helvetica, sans-serif;
+            margin: 0;
+            overflow: hidden; /* Предотвращает появление полос прокрутки */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Занимает всю высоту экрана */
+        }
+
+        #time {
+            font-size: 180px;
+        }
+
+        #date {
+            font-size: 90px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="time"></div>
+    <div id="date"></div>
+
+    <script>
+        function updateTime() {
+            // Нет необходимости устанавливать библиотеки, используем встроенные возможности JavaScript
+            const now = new Date();
+
+            const hours = String(now.getHours()).padStart(2, '0'); // Добавляем ведущий ноль
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+            const day = String(now.getDate()).padStart(2, '0');
+
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+            const currentDate = `${year}-${month}-${day}`;
+
+            document.getElementById("time").innerText = currentTime;
+            document.getElementById("date").innerText = currentDate;
+        }
+
+        // Обновляем время каждую секунду
+        setInterval(updateTime, 1000);
+
+        // Запускаем функцию обновления времени сразу при загрузке страницы
+        updateTime();
+    </script>
+
+</body>
+</html>
