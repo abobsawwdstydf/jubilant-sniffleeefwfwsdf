@@ -34,7 +34,6 @@
         }
 
         button {
-            background-color: #bb86fc;
             border: none;
             color: white;
             padding: 8px 16px;
@@ -47,12 +46,19 @@
             border-radius: 4px;
             transition: transform 0.2s;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #bb86fc, #64ffda);
+            background-size: 200% 200%;
+            animation: gradientMove 3s linear infinite;
         }
 
         button:hover {
             transform: scale(1.05);
         }
-
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         #message {
             margin-top: 10px;
             font-weight: bold;
@@ -60,7 +66,7 @@
             text-shadow: 0 0 5px #64ffda;
             text-align: center;
         }
-         /* Уведомления */
+        /* Уведомления */
         .notification {
             background-color: rgba(100, 255, 218, 0.2); /* Неоновый бирюзовый с прозрачностью */
             border: 1px solid #64ffda;
@@ -71,12 +77,14 @@
             display: none; /* Скрываем по умолчанию */
             text-align: center;
         }
-        /* Клик */
+         /* Клик */
         #clickButton {
             width: 100px; /* Круглая */
             height: 100px;
             border-radius: 50%; /* Круглая */
-            background-color: #bb86fc;
+            background: linear-gradient(45deg, #bb86fc, #64ffda); /* Градиент для кликера */
+            background-size: 200% 200%;
+            animation: gradientMove 3s linear infinite;
             color: white;
             font-size: 20px;
             border: none;
@@ -146,7 +154,7 @@
             flex-direction: column;
             align-items: stretch;
         }
-        /* Анимацыя */
+         /* Анимацыя */
         .star-animation {
             position: relative;
             display: inline-block;
@@ -172,126 +180,144 @@
         .star:nth-child(1) { top: 0; left: 50%; animation-delay: 0s; }
         .star:nth-child(2) { top: 50%; left: 100%; animation-delay: 0.2s; }
         .star:nth-child(3) { top: 100%; left: 50%; animation-delay: 0.4s; }
-        .star:nth-child(4) { top: 50%; left: 0; animation-delay: 0.6s }
-  
- /* Уведомления */
-        .notification {
-            background-color: rgba(100, 255, 218, 0.2); /* Неоновый бирюзовый с прозрачностью */
-            border: 1px solid #64ffda;
-            color: #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            display: none; /* Скрываем по умолчанию */
-            text-align: center;
+        .star:nth-child(4) { top: 50%; left: 0; animation-delay: 0.6s; }
+        .star:nth-child(5) { top: 25%; left: 25%; animation-delay: 0.8s; }
+        .star:nth-child(6) { top: 75%; left: 75%; animation-delay: 1s; }
+       #bettingOptions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    #bettingOptions button {
+        width: 80px;
+        margin: 5px;
+         background: linear-gradient(45deg, #bb86fc, #64ffda);
         }
     </style>
 </head>
 <body>
 
 <div class="phone-container">
-         <div class="tabs">
-            <a href="#tab-shahta" class="tab" onclick="showTab('shahta')">Шахта</a>
-            <a href="#tab-inventory" class="tab" onclick="showTab('inventory')">Инвентарь</a>
-            <a href="#tab-rating" class="tab" onclick="showTab('rating')">Рейтинг</a>
-            <a href="#tab-dailybonus" class="tab" onclick="showTab('dailybonus')">Бонус</a>
-        </div>
+    <div class="tabs">
+       
+        <a href="#tab-shahta" class="tab" onclick="showTab('shahta')">Шахта</a>
+        <a href="#tab-inventory" class="tab" onclick="showTab('inventory')">Инвентарь</a>
+        <a href="#tab-dailybonus" class="tab" onclick="showTab('dailybonus')">Бонус</a>
+         <a href="#tab-luck" class="tab" onclick="showTab('luck')">Удача</a>
+    </div>
         
-    <div id="tab-shahta" class="tab-content active">
-         <h1>DH Шахта</h1>
-         <p>Кликайте, чтобы добывать камни!</p>
-          <button id="clickButton" onclick="mine()">⛏️ Клик!</button>
+    <div id="tab-shahta" class="tab-content">
+           <h1>DH Шахта</h1>
+        <p>Кликайте, чтобы добывать камни!</p>
+             <button id="clickButton" class="gradient-button">⛏️ Клик!</button>
             <div id="message">Баланс: <span id="balance">0</span> камней</div>
             <h2>Доступные локации</h2>
             <div id="locations">
                  <div class="location">
                  
-                 <h3>Первая локация ⛏️</h3>
-                    <p>Стоимость: 0 камней, Время: 20 сек, Награда: 5-28 камней</p>
-                   <button onclick="startMining(1)">Копать</button>
+                  <h3>Первая локация ⛏️</h3>
+                  <p>Стоимость: 0 камней, Время: 20 мин, Награда: 5-28 камней</p>
+                   <button onclick="startMining(1)"class="gradient-button">Копать</button>
                 </div>
                 <div class="location">
-                    
-                    <h3>Вторая локация 🪨</h3>
-                   <p>Стоимость: 25 камней, Время: 60 сек, Награда: 70-120 камней</p>
-                   <button onclick="startMining(2)">Копать</button>
+               
+                     <h3>Вторая локация 🪨</h3>
+                     <p>Стоимость: 25 камней, Время: 60 мин, Награда: 70-120 камней</p>
+                    <button onclick="startMining(2)"class="gradient-button">Копать</button>
                 </div>
                  <div class="location">
-                 
-                 <h3>Третья локация 💎</h3>
-                  <p>Стоимость: 89 камней, Время: 90 сек, Награда: 200-370 камней</p>
-                    <button onclick="startMining(3)">Копать</button>
-                </div>
-                 <div class="location">
-                    
-                    <h3>Четвёртая локация 🌟</h3>
-                    <p>Стоимость: 245 камней, Время: 140 сек, Награда: 420-680 камней</p>
-                    <button onclick="startMining(4)">Копать</button>
+                   
+                      <h3>Третья локация 💎</h3>
+                       <p>Стоимость: 89 камней, Время: 90 мин, Награда: 200-370 камней</p>
+                        <button onclick="startMining(3)"class="gradient-button">Копать</button>
                 </div>
                  <div class="location">
                     
+                     <h3>Четвёртая локация 🌟</h3>
+                     <p>Стоимость: 245 камней, Время: 140 сек, Награда: 420-680 камней</p>
+                      <button onclick="startMining(4)" class="gradient-button">Копать</button>
+                </div>
+                 <div class="location">
+                  
                     <h3>Пятая локация 🔥</h3>
                     <p>Стоимость: 480 камней, Время: 220 сек, Награда: 860-1390 камней</p>
-                    <button onclick="startMining(5)">Копать</button>
+                      <button onclick="startMining(5)"class="gradient-button">Копать</button>
                 </div>
                  <div class="location">
                     
-                    <h3>Шестая локация 🚀</h3>
-                   <p>Стоимость: 849 камней, Время: 275 сек, Награда: 1890-3693 камней</p>
-                  <button onclick="startMining(6)">Копать</button>
+                     <h3>Шестая локация 🚀</h3>
+                      <p>Стоимость: 849 камней, Время: 275 сек, Награда: 1890-3693 камней</p>
+                      <button onclick="startMining(6)"class="gradient-button">Копать</button>
                 </div>
                  <div class="location">
-                    
+                   
                     <h3>Седьмая локация 🚀</h3>
                     <p>Стоимость: 1489 камней, Время: 275 сек, Награда: 2890-6493 камней</p>
-                    <button onclick="startMining(7)">Копать</button>
+                       <button onclick="startMining(7)"class="gradient-button">Копать</button>
                 </div>
                  <div class="location">
                     
-                    <h3>Восьмая локация 🚀</h3>
-                   <p>Стоимость: 2489 камней, Время: 275 сек, Награда: 3890-9093 камней</p>
-                    <button onclick="startMining(8)">Копать</button>
+                      <h3>Восьмая локация 🚀</h3>
+                      <p>Стоимость: 2489 камней, Время: 275 сек, Награда: 3890-9093 камней</p>
+                     <button onclick="startMining(8)"class="gradient-button">Копать</button>
                 </div>
             </div>
-        </div>
-
-          <div id="tab-dailybonus" class="tab-content">
-              <button onclick="claimBonus()">🎁 Получить бонус</button>
-               <div id="notification" class="notification"></div>
-            <div id="bonusAnimation" class="star-animation" style="display:none;">
+     <div id="notification" class="notification"></div>
+    </div>
+     <div id="tab-dailybonus" class="tab-content">
+         <button onclick="claimBonus()" class="gradient-button">🎁 Получить бонус</button>
+              <div id="notification" class="notification"></div>
+              
+             <div id="bonusAnimation" class="star-animation" style="display:none;">
                  <div class="star"></div>
                 <div class="star"></div>
                <div class="star"></div>
                 <div class="star"></div>
-                 <div class="star"></div>
-              <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
             </div>
         </div>
-
         <div id="tab-inventory" class="tab-content">
-            <p>Тут будет ваш инвентарь</p>
+             <p>Тут будет ваш инвентарь</p>
         </div>
-
-        <div id="tab-rating" class="tab-content">
-            <p>Таблица рейтинга лучших шахтеров!</p>
+   <div id="tab-luck" class="tab-content">
+             <p>Испытай удачу!</p>
+        <div id="bettingOptions">
+              <button onclick="tryLuck(5)" class="gradient-button">Ставка 5</button>
+                <button onclick="tryLuck(50)" class="gradient-button">Ставка 50</button>
+                <button onclick="tryLuck(150)" class="gradient-button">Ставка 150</button>
+                 <button onclick="tryLuck(450)" class="gradient-button">Ставка 450</button>
+                <button onclick="tryLuck(820)" class="gradient-button">Ставка 820</button>
+                <button onclick="tryLuck(1200)" class="gradient-button">Ставка 1200</button>
         </div>
+             <div id="notification-luck" class="notification"></div>
 </div>
-
+</div>
 <script>
-    const tg = window.Telegram.WebApp; // Получаем объект Telegram.WebApp
-    let balance = 0;
-    let dailyBonusClaimed = false;
-    let lastClaimDate = null; // Дата последнего получения бонуса
-
-    function sendMessage(e) {
-            tg.sendData(e)
+     const tg = window.Telegram.WebApp; // Получаем объект Telegram.WebApp
+    let balance = parseInt(localStorage.getItem('balance')) || 0;
+    let dailyBonusClaimed = localStorage.getItem('dailyBonusClaimed') === 'true' || false;
+    let lastClaimDate = localStorage.getItem('lastClaimDate') || null;
+    let clickInterval;
+    let clickSpeed = 150; // Увеличиваем начальную скорость
+     const luckMultipliers = {
+            5: {min: 1, max: 120},    // 20%
+            50: {min: 1, max: 220},  // 20%
+            150: {min: 1, max: 420}, // 20%
+            450: {min: 1, max: 820},    // 20%
+            820: {min: 1, max: 1500},  // 20%
+            1200: {min: 1, max: 2500} // 20%
+        };
+    let allData = { // Обьект
+        balance: balance,
+        dailyBonusClaimed: dailyBonusClaimed,
+        lastClaimDate: lastClaimDate
+    };
+    function saveData(){
+            tg.sendData(JSON.stringify(allData))
         }
-
-    function updateBalance() {
-        document.getElementById("balance").innerText = balance;
-    }
-
-      function showNotification(message) {
+        function showNotification(message) {
         let notificationDiv = document.getElementById("notification");
         notificationDiv.innerText = message;
         notificationDiv.style.display = "block"; // Показываем уведомление
@@ -301,14 +327,15 @@
             notificationDiv.style.display = "none";
         }, 3000);
     }
-   function claimBonus() {
-        let today = new Date().toLocaleDateString();
-         //Добавим анимицию
-        if (lastClaimDate !== today) {
+  function claimBonus() {
+       let today = new Date().toLocaleDateString();
+       if (lastClaimDate !== today) {
             balance += 20;
             updateBalance();
             dailyBonusClaimed = true;
             lastClaimDate = today;
+              localStorage.setItem('dailyBonusClaimed', dailyBonusClaimed);
+        localStorage.setItem('lastClaimDate', lastClaimDate);
             showNotification("Вы получили ежедневный бонус в размере 20 камней!");
             startAnimation();
         } else {
@@ -326,36 +353,99 @@
             7: {cost: 1489, time: 275, rewardMin: 2890, rewardMax: 6493},
             8: {cost: 2489, time: 275, rewardMin: 3890, rewardMax: 9093}
         };
-
         let cost = locationData[locationId].cost;
-        let time = locationData[locationId].time;
-        let rewardMin = locationData[locationId].rewardMin;
-        let rewardMax = locationData[locationId].rewardMax;
-
         if (balance >= cost) {
             balance -= cost;
             updateBalance();
-            showNotification(`Начато копание в локации ${locationId}...`);
-            } else {
+                showNotification(`Начато копание в локации ${locationId}...`);
+                 setTimeout(function() {
+                  let reward = Math.floor(Math.random() * (locationData[locationId].rewardMax -locationData[locationId].rewardMin +1)) + locationData[locationId].rewardMin
+                     showNotification(`Копание завершено! Вы получили ${reward} камней.`) //Вставим
+                      balance += reward;
+                    updateBalance();
+                    }, locationData[locationId].time* 1000);
+        }  else {
             showNotification("Недостаточно камней для начала копания!");
         }
     }
-    
-    function showTab(tabId) {
-            let tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-            document.getElementById("tab-" + tabId).classList.add("active");
+  function showTab(tabId) {
+        let tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
         }
-
-    function startAnimation() {
+       document.getElementById("tab-" + tabId).classList.add("active");
+    }
+      function startAnimation() {
         document.getElementById("bonusAnimation").style.display = "inline-block";
         setTimeout(function() {
-            document.getElementById("bonusAnimation").style.display = "none";
+             document.getElementById("bonusAnimation").style.display = "none";
         }, 3000);
     }
-  </script>
 
+    function tryLuck(betAmount) {
+         if (balance >= betAmount) {
+            balance -= betAmount;
+            updateBalance();
+         const multiplierRange = luckMultipliers[betAmount]
+         if (multiplierRange) {
+            const winMultiplier = Math.floor(Math.random() * (multiplierRange.max - multiplierRange.min + 1)) + multiplierRange.min;
+            let winAmount = winMultiplier
+            balance += winAmount;
+              updateBalance();
+                 showLuckNotification(`Вы выиграли ${winAmount} камней!`);
+            } else {
+                showLuckNotification("Вам не повезло, попробуйте еще раз!");
+            }
+        }  else {
+            showLuckNotification("Недостаточно камней для этой ставки!");
+        }
+    }
+     function showLuckNotification(message) {
+        let notificationDiv = document.getElementById("notification-luck");
+        notificationDiv.innerText = message;
+        notificationDiv.style.display = "block"; // Показываем уведомление
+
+        // Скрываем уведомление через 3 секунды
+        setTimeout(function() {
+            notificationDiv.style.display = "none";
+        }, 3000);
+    }
+ let isMining = false;
+   function continuousMine() {
+        if (isMining) {
+            balance += 1;
+            updateBalance();
+            showNotification("+1 камень!");
+           clickSpeed = Math.max(50, clickSpeed * 0.9);
+            setTimeout(continuousMine, clickSpeed);
+        }
+    }
+    document.getElementById("clickButton").addEventListener("mousedown", function() {
+        isMining = true;
+        continuousMine();
+    });
+     document.getElementById("clickButton").addEventListener("mouseup", function() {
+        isMining = false;
+         clickSpeed = 150; // Восстанавливаем начальную скорость
+    });
+    document.getElementById("clickButton").addEventListener("mouseleave", function() {
+        isMining = false;
+        clickSpeed = 150; // Восстанавливаем начальную скорость
+    });
+    function updateBalance() {
+        document.getElementById("message").innerText = "Баланс: " + balance + " камней";
+         localStorage.setItem('balance', balance); // Сохраняем в localStorage
+    }
+    function loadData() { // Загружаем данные
+         balance = parseInt(localStorage.getItem('balance')) || 0;
+         updateBalance();
+       dailyBonusClaimed = localStorage.getItem('dailyBonusClaimed') === 'true' || false;
+         lastClaimDate = localStorage.getItem('lastClaimDate') || null;
+        
+            
+        }
+    loadData()
+    showTab('shahta');
+</script>
 </body>
 </html>
