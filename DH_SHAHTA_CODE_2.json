@@ -1,0 +1,71 @@
+{
+  "LOCATION_DATA": {
+    "1": {
+      "name": "Первая локация ⛏️",
+      "cost": 0,
+      "time": 1200,
+      "reward_min": 5,
+      "reward_max": 28,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l1.jpg"
+    },
+    "2": {
+      "name": "Вторая локация 🪨",
+      "cost": 25,
+      "time": 3600,
+      "reward_min": 70,
+      "reward_max": 120,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l2.jpg"
+    },
+    "3": {
+      "name": "Третья локация 💎",
+      "cost": 89,
+      "time": 5400,
+      "reward_min": 200,
+      "reward_max": 370,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l3.jpg"
+    },
+    "4": {
+      "name": "Четвертая локация 🌟",
+      "cost": 245,
+      "time": 8400,
+      "reward_min": 420,
+      "reward_max": 680,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l4.jpg"
+    },
+    "5": {
+      "name": "Пятая локация 🔥",
+      "cost": 480,
+      "time": 13200,
+      "reward_min": 860,
+      "reward_max": 1390,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l5.jpg"
+    },
+    "6": {
+      "name": "Шестая локация 🚀",
+      "cost": 849,
+      "time": 16500,
+      "reward_min": 1890,
+      "reward_max": 3693,
+      "image_url": "https://www.darkheavens.ru/image_shahta_l6.jpg"
+    }
+  },
+  "RARE_ITEMS": {
+    "rare_diamond": {
+      "name": "Редкий алмаз 💎",
+      "description": "Очень ценный алмаз.",
+      "effect": {
+        "balance_multiplier": 1.5
+      },
+      "value": 500
+    },
+    "ancient_artifact": {
+      "name": "Древний артефакт 🏺",
+      "description": "Артефакт с неизвестными свойствами.",
+      "effect": {
+        "mining_speed": 2.0,
+        "duration": 600
+      },
+      "value": 1000
+    }
+  }
+}
