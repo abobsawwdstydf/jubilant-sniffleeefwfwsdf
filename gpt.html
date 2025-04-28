@@ -1,15 +1,45 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Heavens: GPT</title>
+    <title>Dark Heavens GPT</title>
 
     <!-- Добавляем иконку -->
     <link rel="shortcut icon" href="https://static.tildacdn.info/tild6166-6661-4830-b039-633831623634/server.png" type="image/x-icon">
 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative; /* Необходимо для overlay */
+        }
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0px; /* Высота блока текста */
+            background-color: black; /* Цвет фона, чтобы скрыть оригинальный текст */
+            color: white; /* Цвет текста на overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; /* Чтобы блок был поверх iframe */
+            font-size: 12px;
+        }
+    </style>
+</head>
 <body>
-    <iframe src="http://f1.aurorix.net:40857" title="AI Integration"></iframe>
+    <iframe src="http://f1.aurorix.net:40857/" title="AI Integration"></iframe>
+
+    <!-- Overlay с заменой текста -->
+    <div class="overlay">
+        
     </div>
 </body>
 </html>
