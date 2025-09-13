@@ -1,107 +1,339 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Dark Heavens: Главная страница</title>
-    <meta name="description"
-          content="Dark Heavens Corporate. by haker_one"/>
-    <meta name="keywords" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Heavens Corporate</title>
 
-    <meta property="og:title" content="Dark Heavens: Главная страница" />
-    <meta property="og:description" content="Dark Heavens Corporate. by haker_one" />
-    <meta property="og:image" content="assets/img/18815467-a318-4d5d-8c04-5bb19654b516-13129133.png" />
+    <!-- ИКОНКА В ТАБЕ БРАУЗЕРА -->
+    <link rel="icon" href="https://www.darkheavens.ru/assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129162.png" type="image/png">
 
-    <meta name="twitter:title" content="Dark Heavens: Главная страница" />
-    <meta name="twitter:description" content="Dark Heavens Corporate. by haker_one" />
-    <meta name="twitter:image" content="assets/img/18815467-a318-4d5d-8c04-5bb19654b516-13129133.png" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        <meta name="robots" content="noindex" />
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: white;
+            position: relative;
+        }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-        <link rel="preconnect" href="https://259506.selcdn.ru" />
+        /* Фиолетовый туман */
+        .fog {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: fogPulse 8s ease-in-out infinite alternate;
+            z-index: 0;
+        }
 
-        <link rel="stylesheet" href="assets/styles/styles-core.css" />
+        @keyframes fogPulse {
+            from { opacity: 0.6; }
+            to { opacity: 0.9; }
+        }
 
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129165.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129162.png">
-        <link rel="icon" type="image/png" sizes="120x120" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129164.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129164.png">
-        <link rel="icon" type="image/png" sizes="180x180" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129163.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129163.png">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family&#x3D;Ubuntu&amp;subset&#x3D;all&amp;display&#x3D;swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family&#x3D;Open+Sans&amp;subset&#x3D;all&amp;display&#x3D;swap">
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            text-align: center;
+            padding: 30px;
+            width: 100%;
+        }
 
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+            background: linear-gradient(to right, #00f5ff, #00ff80, #9d4edd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
 
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff; }
+            to { text-shadow: 0 0 15px #9d4edd, 0 0 30px #9d4edd, 0 0 40px #9d4edd; }
+        }
 
-              <style>
-              .container {
-                width: 100%;
-                max-width: 2048px; /* Максимальная ширина равна ширине изображения */
-                margin: 0 auto;
-                background-color: #f0f0f0; /* Замените #f0f0f0 на желаемый цвет */
-              }
-            
-              .responsive-image {
-                width: 100%;
-                height: auto;
-                display: block;
-                object-fit: contain; /* Гарантирует, что изображение не будет обрезано */
-              }
-            
-              /* Медиа-запрос для экранов меньше 768px (обычно мобильные) */
-              @media (max-width: 768px) {
-                .container {
-                  max-width: 100%; /* Занимает всю доступную ширину на мобильных */
-                }
-              }
-            </style>
-            
-            <body>
-              <div class="container">
-                <img src="https://www.darkheavens.ru/hd_crop_534ea2218df55232f652fb48370e1539_67f20062acfea.png" alt="" class="responsive-image">
-              </div>
-            </body>  
+        /* БАННЕР — ТОЛЬКО ЭТО ИЗОБРАЖЕНИЕ НА СТРАНИЦЕ */
+        .banner-img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 18px;
+            margin: 25px auto 50px;
+            box-shadow: 0 0 50px rgba(138, 43, 226, 0.8),
+                        0 0 80px rgba(0, 245, 255, 0.3);
+            animation: bannerGlow 5s ease-in-out infinite alternate;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @keyframes bannerGlow {
+            from { box-shadow: 0 0 30px rgba(138, 43, 226, 0.6), 0 0 50px rgba(0, 245, 255, 0.2); }
+            to { box-shadow: 0 0 60px rgba(138, 43, 226, 0.9), 0 0 90px rgba(0, 245, 255, 0.4); }
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            position: relative;
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #00f5ff, #00ff80, #9d4edd);
+            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4),
+                        0 0 30px rgba(0, 255, 128, 0.3),
+                        0 0 45px rgba(157, 78, 221, 0.2);
+            letter-spacing: 0.5px;
+            outline: none;
+            transform-origin: center;
+            z-index: 2;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 0 25px rgba(0, 245, 255, 0.7),
+                        0 0 40px rgba(0, 255, 128, 0.6),
+                        0 0 60px rgba(157, 78, 221, 0.5);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .btn:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.5),
+                        0 0 20px rgba(0, 255, 128, 0.4),
+                        0 0 30px rgba(157, 78, 221, 0.3);
+            animation: clickEffect 0.3s ease-out;
+        }
+
+        @keyframes clickEffect {
+            0% { transform: translateY(2px) scale(0.98); }
+            50% { transform: translateY(1px) scale(1.01); }
+            100% { transform: translateY(2px) scale(0.98); }
+        }
+
+        .btn:nth-child(odd) {
+            background: linear-gradient(135deg, #00ff80, #9d4edd, #00f5ff);
+        }
+
+        .btn:nth-child(even) {
+            background: linear-gradient(135deg, #9d4edd, #00f5ff, #00ff80);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            z-index: -1;
+        }
+
+        .btn.dev-btn {
+            background: linear-gradient(135deg, #ff00cc, #9d4edd, #00f5ff);
+            animation: devGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes devGlow {
+            0% { box-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 30px #9d4edd; }
+            50% { box-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc, 0 0 60px #9d4edd; }
+            100% { box-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 30px #9d4edd; }
+        }
+
+        .btn.tiktok-btn {
+            background: linear-gradient(135deg, #ff006e, #9d4edd, #ff00cc);
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5),
+                        0 0 30px rgba(255, 0, 110, 0.4),
+                        0 0 45px rgba(157, 78, 221, 0.3);
+        }
+
+        .btn.tiktok-btn:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.7),
+                        0 0 40px rgba(255, 0, 110, 0.6),
+                        0 0 55px rgba(157, 78, 221, 0.5);
+        }
+
+        .copyright {
+            margin-top: 80px;
+            padding: 15px 20px;
+            background-color: #1a1a2e;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #aaa;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 300;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .btn { padding: 15px 20px; font-size: 1rem; }
+            .banner-img { max-width: 450px; }
+            .copyright { font-size: 0.9rem; }
+        }
+    </style>
 </head>
+<body>
+    <div class="fog"></div>
 
-<body class="sb-body sb-body_with-footer  ubuntu__title open-sans-regular sb-content-size_m sb-buttons-border_round">
-<div class="site-wrapper" tabindex="0">
-               <section data-type="cta" id="call-to-action" class="s-call-to-action-type-3 sb-text-white sb-align-center sb-padding-top_m sb-padding-bottom_s"><link
-                            id="call-to-action-type-3"
-                            rel="stylesheet"
-                            href="assets/styles/call-to-action-type-3.css"
-                        /><div class=" sb-background" style="background: #111111;"></div><div class="sb-container">  <div class="sb-col_md-12 sb-col_sm-12 sb-col_xs-12  sb-col_lg-8 sb-col-offset_lg-2 "><div class="s-call-to-action-type-3__buttons">  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/haker_one"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #000000;"  target="_blank"   >   <span class="sb-button__title">Создатель</span><span class="sb-button__description">haker_one</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/dark_heavens_support_bot"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #000000;"  target="_blank"   >   <span class="sb-button__title">Тех Подержка</span><span class="sb-button__description">Телеграм бот Тех Подержка</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="mailto:darkheavensru@gmail.com"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #000000;"   >   <span class="sb-button__title">Email Компании</span><span class="sb-button__description">Email</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://darkheavens.ru/gpt"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #000000;"  target="_blank"   >   <span class="sb-button__title">Dark Heavens: GPT</span><span class="sb-button__description">Сайт Dark Heavens</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://darkheavens.ru/1game"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #000000;"  target="_blank"   >   <span class="sb-button__title">Dark Heavens: GAME</span><span class="sb-button__description">Сайт Dark Heavens</span>   </a>  </div>  </div></div></div> </section>                <section data-type="main" id="main-2" class="s-main-type-3 sb-block sb-block_fullscreen sb-text-white sb-align-center"><link
-                            id="main-type-3"
-                            rel="stylesheet"
-                            href="assets/styles/main-type-3.css"
-                        /> <div class="sb-background-image sb-background sb-background" style="background-image: url(assets/img/df8ebfe1-c777-4f70-be05-a94bfa17ee69-13212010.png);"><div class="sb-background-overlay" style="opacity: 0.3"></div></div> <div class="sb-container s-main-type-3__container sb-m-clear-top"><div class="sb-row s-main-type-3__top-content  sb-row_center "><div class="sb-col_lg-8 sb-col_md-12 sb-col_sm-12 sb-col_xs-12 sb-m-clear-top">     </div></div>  </div>  </section>                            <section data-type="cta" id="call-to-action-2" class="s-call-to-action-type-3 sb-text-white sb-align-center sb-padding-top_l sb-padding-bottom_s"><link
-                            id="call-to-action-type-3"
-                            rel="stylesheet"
-                            href="assets/styles/call-to-action-type-3.css"
-                        /><div class=" sb-background" style="background: #111111;"></div><div class="sb-container">  <div class="sb-col_md-12 sb-col_sm-12 sb-col_xs-12  sb-col_lg-8 sb-col-offset_lg-2 "><div class="s-call-to-action-type-3__buttons">  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/DH_Voxity_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark Voxiti</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Голос в текст и наоборот)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/DH_Botify_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark Botify</span><span class="sb-button__description">Телеграм бот от Dark Heavens (бот что-то умеет)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/dark_heavens_anonym_chat_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark ANONYM</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Анонимный чат 16+) платно</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/dark_heavens_sim_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark SIM</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Аренда номиров для приёма смс и т.д)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/dark_heavens_promotions_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Продвижения и накрутка</span><span class="sb-button__description">Телеграм бот от Dark Heavens</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/dark_heavens_steam_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark STEAM</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Пополнения STEAM акаунта в любой стране)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/Dark_ai_GPT_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Dark GPT</span><span class="sb-button__description">Телеграм бот от Dark Heavens</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/Noir_AI_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Генерацыя изображений (Noir)</span><span class="sb-button__description">Телеграм бот от Dark Heavens</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/NioTube_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">NioTube</span><span class="sb-button__description">Телеграм бот от Dark Heavens (типа ютуба)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/Endipi_bot"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Анонимный чат (NEW)</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Анонимный чат) NEW</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/DH_SHAHTA_ROBOT"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Шахта бот</span><span class="sb-button__description">Телеграм бот от Dark Heavens (Шахта бот)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/DH_SHAHTA_CHAT"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: rgba(59, 25, 81, 1);"  target="_blank"   >   <span class="sb-button__title">ЧАТ шахта</span><span class="sb-button__description">ЧАТ</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/SR_Link_ROBOT"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #4E1B6E;"  target="_blank"   >   <span class="sb-button__title">Сокращатель ссылок </span><span class="sb-button__description">Телеграм бот от Dark Heavens (Сокращатель ссылок)</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://www.darkheavens.ru/Dark_Heavens_GPT.apk"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: rgba(32, 191, 107, 1);"  target="_blank"   >   <span class="sb-button__title">Dark Heavens GPT</span><span class="sb-button__description">Приложения для Android</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://goo.su/T8q3ZUb"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: #2D98DA;"  target="_blank"   >   <span class="sb-button__title">Dark Heavens GPT</span><span class="sb-button__description">Приложения для Windows</span>   </a>  </div>  <div class="s-call-to-action-type-3__button-wrapper">  <a href="https://t.me/haker_one"  data-button-animation-enabled="buttonLink"     class="sb-button-primary sb-button-primary_with-description s-call-to-action-type-3__button sb-button-scheme-white" style="background-color: rgba(38, 36, 40, 1);"  target="_blank"   >   <span class="sb-button__title">Разработчик всего что выше и не только</span><span class="sb-button__description">haker_one</span>   </a>  </div>  </div></div></div> </section>              <section data-type="footer-customer" id="footer-customer-2" class="s-footer-customer-type-1 sb-text-white sb-padding-top_m"><link
-                            id="footer-customer-type-1"
-                            rel="stylesheet"
-                            href="assets/styles/footer-customer-type-1.css"
-                        /><div class=" sb-background" style="background: #333333;"></div><div class="sb-container"><div class="sb-row sb-m-clear-top">  <div class=" sb-col_lg-6 sb-col_md-5  sb-col_sm-12 sb-col_xs-12"><div class="s-footer-customer-type-1__info sb-m-clear-bottom"><h5 class="s-footer-customer-type-1__title sb-font-h5 sb-font-title sb-m-21-bottom">@ Dark Heavens 2025</h5> <div class="s-footer-customer-type-1__description sb-text-opacity sb-font-p3">haker_one</div></div></div>   <div class="sb-col_sm-12 sb-col_xs-12 sb-m-7-top s-footer-customer-type-1__column  sb-col_lg-6 sb-col_md-7 "><div class="s-footer-customer-type-1__wrapper"><div class="s-footer-customer-type-1__socials sb-text-white"> <div class=" sb-background sb-background" style="background: #111111;"></div> <nav class="s-footer-customer-type-1__socials-list">   <a class="s-footer-customer-type-1__item sb-color-border" href="mailto:darkheavensru@gmail.com" aria-label="  Электронная почта ">              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="social_ic-email_x16"><path d="M7.21596 5.91784C7.63375 6.19676 8.36681 6.19679 8.78469 5.91781C8.78475 5.91777 8.78485 5.91771 8.78491 5.91768L15.9057 1.16376C15.6722 0.487312 15.0302 0 14.2763 0H1.72423C0.970317 0 0.328343 0.487312 0.0947475 1.16376L7.21574 5.91771C7.21584 5.91777 7.2159 5.91777 7.21596 5.91784Z" fill="currentColor"/><path d="M9.30464 6.69873C9.30454 6.6988 9.30448 6.69886 9.30442 6.69889C8.93873 6.94302 8.46929 7.06509 8 7.06509C7.53062 7.06509 7.06137 6.94305 6.69565 6.69886C6.69558 6.69883 6.69555 6.6988 6.69549 6.69877L0 2.22888V10.2737C0 11.2256 0.77335 12 1.72395 12H14.2761C15.2267 12 16 11.2256 16 10.2737V2.22888L9.30464 6.69873Z" fill="currentColor"/></g></svg>     </a>    <a class="s-footer-customer-type-1__item sb-color-border" href="https://t.me/dark_heavens_ru" target="_blank" aria-label="  Telegram ">        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="social_ic-telegram_x16"><path d="M1.09992 5.59647C5.39487 3.76188 8.25885 2.55241 9.69185 1.96805C13.7834 0.299594 14.6335 0.00976514 15.1877 9.27819e-05C15.3095 -0.00191006 15.582 0.0277027 15.7586 0.16813C15.9076 0.286703 15.9486 0.44688 15.9683 0.5593C15.9879 0.671721 16.0123 0.927819 15.9929 1.12793C15.7712 3.41192 14.8118 8.95457 14.3237 11.5127C14.1172 12.5951 13.7105 12.958 13.3168 12.9936C12.4613 13.0707 11.8116 12.4392 10.9829 11.9067C9.68624 11.0733 8.95369 10.5545 7.69503 9.74136C6.24042 8.80157 7.18338 8.28505 8.01236 7.44091C8.22931 7.21999 11.999 3.85836 12.0719 3.55341C12.0811 3.51527 12.0895 3.37311 12.0034 3.29804C11.9172 3.22297 11.7901 3.24864 11.6983 3.26906C11.5683 3.29799 9.4968 4.64035 5.48389 7.29611C4.89591 7.69195 4.36333 7.88482 3.88616 7.87472C3.36012 7.86357 2.34822 7.58311 1.59598 7.34338C0.673328 7.04933 -0.0599784 6.89387 0.00387615 6.3945C0.0371355 6.13439 0.402482 5.86838 1.09992 5.59647Z" fill="currentColor"/></g></svg>           </a>   </nav></div></div></div>  </div></div> </section>     </div>
+    <div class="container">
+        <h1>Dark Heavens Corporate</h1>
 
-<template id="popups-stash">
-</template>
+        <!-- БАННЕР — ПРАВИЛЬНОЕ ИЗОБРАЖЕНИЕ -->
+        <img src="https://www.darkheavens.ru/hd_68c59977cba5c.jpg" alt="Dark Heavens Corporate" class="banner-img">
 
-<template id="popups-images-stash">
-</template>
+        <div class="btn-container">
+            <!-- Исправлено: Создай своего ИИ агента для телеграм канала -->
+            <a href="https://t.me/Create_AI_agents_bot" class="btn"><span>Создай ИИ агента 🎭</span></a>
 
-<script>
-    window.tbConfig={"inFrame":false,"enableLazyLoading":false,"enableJsLazyLoading":false,"enableDynamicGoods":true,"isPreviewMode":false,"hasPromocodes":false,"posScriptUrl":"https://forma.tinkoff.ru/static/onlineScript.js","enableMessengerLazyLoading":true,"enableCssScrollSnapSlider":true,"usePublicSitesOrdersApi":false,"yandexMapsApiKey":"a9eba83c-b342-4dfe-ab11-2c7cbd6839cb","cartHash":"U2FsdGVkX19OpeAFep8aKc0c090Zp8QhRbj3/BmWj2eTpmbCz7sJC2MRO4q2u6sFZc4+HeRZuaSt1oCYQhEY7RzC1B9pOz6DrfKKodGGtIgR6se00Z8RsRFmjU7Zw0y9","enableSitesCheckoutIntegration":false,"staticPath":"https://e26f86a1-a349-40e0-9864-90f0278f7cc5.selcdn.net/tb/0.1.788-40447641"};
-    window.tbConfig.isExported=true;window.tbConfig.exportedApiUrl='https://a.tb.ru';
-    window.tbConfig.apiUrl=!window.tbConfig.isExported ? '' : window.tbConfig.exportedApiUrl;
-    window.tbConfig.isModern='noModule'in HTMLScriptElement.prototype;
-    (function (){var n,o="chrome"in window,e="InstallTrigger"in window;function t(n){var o=document.createElement("script");return o.src="".concat(window.tbConfig.staticPath,"/js/").concat(n),window.tbConfig.isModern&&(o.type="module",o.src=o.src.replace(".js",".modern.js")),o.defer=!0,o}function d(n){var o=t(n);document.head.appendChild(o)}window.tbConfig.enableLazyLoading&&d("lazy-load.js"),"attachShadow"in Element.prototype||d("lit-polyfill-support.js"),d("webcomponents-loader.js"),o||e||d("smoothscroll.js"),n=t("front.js"),document.addEventListener("DOMContentLoaded",(function(){document.head.appendChild(n)}));})()
-</script>
+            <!-- Исправлено: Угадай число — один бот, не дублируется -->
+            <a href="https://t.me/Guess_number_robot" class="btn"><span>Угадай число 🔢</span></a>
 
-    <link rel="stylesheet" href="assets/styles/size-m.css" />
-    <link rel="stylesheet" href="assets/styles/popups.css" />
-    <link rel="stylesheet" href="assets/styles/styles-helpers.css" />
+            <!-- Исправлено: Узнай любой айди -->
+            <a href="https://t.me/uid_info_robot" class="btn"><span>Узнай любой айди 🆔</span></a>
 
+            <!-- Исправлено: Кликер | by haker_one → просто "Кликер" -->
+            <a href="https://t.me/DH_clicker_bot" class="btn"><span>Кликер 🖱️</span></a>
+
+            <!-- Исправлено: Сокращатель ссылок -->
+            <a href="https://t.me/SR_Link_ROBOT" class="btn"><span>Сокращатель ссылок 🔗</span></a>
+
+            <!-- Исправлено: Создай inline кнопки в любом чате -->
+            <a href="https://t.me/K_inline_bot" class="btn"><span>Создай inline кнопки ➕</span></a>
+
+            <!-- Исправлено: Голос в текст и наоборот — не "на оборот" -->
+            <a href="https://t.me/DH_Voxity_bot" class="btn"><span>Голос в текст и обратно 🗣️</span></a>
+
+            <!-- Исправлено: Анонимный чат — Endipi_bot — это он -->
+            <a href="https://t.me/Endipi_bot" class="btn"><span>Анонимный чат 💬</span></a>
+
+            <!-- Исправлено: Шахта бот -->
+            <a href="https://t.me/DH_SHAHTA_ROBOT" class="btn"><span>Шахта бот ⛏️</span></a>
+
+            <!-- Исправлено: Botify -->
+            <a href="https://t.me/DH_Botify_bot" class="btn"><span>Botify ✨</span></a>
+
+            <!-- Исправлено: Dark GPT бот -->
+            <a href="https://t.me/Dark_ai_GPT_bot" class="btn"><span>Dark GPT бот 🧠</span></a>
+
+            <!-- Исправлено: Продвижение и накрутка -->
+            <a href="https://t.me/dark_heavens_promotions_bot" class="btn"><span>Продвижение и накрутка 📈</span></a>
+
+            <!-- Исправлено: Умный AI чат с генерацией изображений -->
+            <a href="https://t.me/Noir_AI_bot" class="btn"><span>AI чат + генерация 🎨</span></a>
+
+            <!-- Исправлено: Старый анонимный чат (платно) -->
+            <a href="https://t.me/dark_heavens_anonym_chat_bot" class="btn"><span>Старый анонимный чат 💰</span></a>
+
+            <!-- Исправлено: Dark SIM -->
+            <a href="https://t.me/dark_heavens_sim_bot" class="btn"><span>Dark SIM 📱</span></a>
+
+            <!-- Исправлено: BILLY CLICKS -->
+            <a href="https://t.me/Billy_clicksbot" class="btn"><span>BILLY CLICKS 🎮</span></a>
+
+            <!-- DH GPT APK -->
+            <a href="https://www.darkheavens.ru/Dark_Heavens_GPT.apk" class="btn"><span>DH GPT (APK) 🤖📱</span></a>
+
+            <!-- DH GPT Windows -->
+            <a href="https://goo.su/T8q3ZUb" class="btn"><span>DH GPT (Windows) 🤖💻</span></a>
+
+            <!-- BILLY CLICKS APK -->
+            <a href="https://www.darkheavens.ru/billy.apk" class="btn"><span>BILLY CLICKS (APK) 🤖📱</span></a>
+
+            <!-- BILLY CLICKS Windows -->
+            <a href="https://goo.su/5juBkU3" class="btn"><span>BILLY CLICKS (Windows) 🤖💻</span></a>
+
+            <!-- Канал Dark Heavens -->
+            <a href="https://t.me/dark_heavens_ru" class="btn"><span>Канал Dark Heavens 📰</span></a>
+
+            <!-- Техподдержка -->
+            <a href="https://t.me/dark_heavens_support_bot" class="btn"><span>ТехПоддержка 🆘</span></a>
+
+            <!-- Разработчик -->
+            <a href="https://t.me/haker_one" class="btn dev-btn"><span>Разработчик 👨‍💻</span></a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@haker_one" class="btn tiktok-btn"><span>TikTok</span></a>
+        </div>
+    </div>
+
+    <!-- Копирайт -->
+    <div class="copyright">
+        © Dark Heavens Corporate 2025
+    </div>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.animation = 'buttonNeon 2s ease-in-out infinite';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.animation = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
