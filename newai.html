@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gaze Paint — рисуй взглядом (прототип)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; display:flex; flex-direction:column; align-items:center; gap:12px; background:#0b1020; color:#e6eef8; min-height:100vh; padding:20px; }
+    #app { width: 920px; max-width:96vw; display:grid; grid-template-columns: 1fr 300px; gap:12px; }
+    #stage { background:#0f1724; border-radius:10px; overflow:hidden; position:relative; height:600px; }
+    canvas#paint { width:100%; height:100%; display:block; }
+    #controls { padding:12px; background:#07102466; border-radius:10px; }
+    button { margin:6px 0; display:block; width:100%; padding:10px; border-radius:8px; border:0; background:#2b6ef6; color:white; cursor:pointer; }
+    .muted { color:#9fb0d8; font-size:13px; }
+    #calgrid { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:8px; }
+    .grid-btn { background:#0b1a33; border-radius:6px; padding:12px; text-align:center; cursor:pointer; color:#9fb0d8; border:1px dashed #17324a; }
+    #videoPreview { width:100%; border-radius:8px; display:block; background:#000; }
+    .small { font-size:12px; color:#a9c0df; margin-top:8px; }
+    label { display:block; margin-top:8px; font-size:13px; }
+    input[type=range] { width:100%; }
+  </style>
+</head>
+<body>
+  <h1>Gaze Paint — рисуй взглядом (прототип)</h1>
+  <div id="app">
+    <div id="stage">
+      <!-- Видео скрытый: webgazer использует его, но мы можем отобразить превью -->
+      <video id="videoPreview" autoplay playsinline muted style="position:absolute; right:8px; bottom:8px; width:180px; height:120px; z-index:5;"></video>
+      <canvas id="paint" width="1200" height="800"></canvas>
+      <!-- Прозрачный слой для отрисовки курсора взгляда -->
+      <canvas id="overlay" width="1200" height="800" style="position:absolute; inset:0; pointer-events:none;"></canvas>
+    </div>
+
+    <div id="controls">
+      <button id="startBtn">Запустить отслеживание</button>
+      <button id="stopBtn" disabled>Остановить</button>
+      <label class="muted">Калибровка (обязательно для лучшей точности):</label>
+      <div id="calgrid">
+        <!-- 9 точек для калибровки -->
+        <div class="grid-btn" data-idx="0">Нажми</div>
+        <div class="grid-btn" data-idx="1">Нажми</div>
+        <div class="grid-btn" data-idx="2">Нажми</div>
+        <div class="grid-btn" data-idx="3">Нажми</div>
+        <div class="grid-btn" data-idx="4">Нажми</div>
+        <div class="grid-btn" data-idx="5">Нажми</div>
+        <div class="grid-btn" data-idx="6">Нажми</div>
+        <div class="grid-btn" data-idx="7">Нажми</div>
+        <div class="grid-btn" data-idx="8">Нажми</div>
+      </div>
+
+      <label class="small">Размер кисти: <span id="brushSizeLabel">12</span></label>
+      <input id="brushSize" type="range" min="2" max="80" value="12">
+
+      <label class="small">Сглаживание (0 — жесткое, 1 — плавно): <span id="smoothLabel">0.2</span></label>
+      <input id="smooth" type="range" min="0" max="1" step="0.01" value="0.2">
+
+      <label class="small">Цвет:</label>
+      <input id="color" type="color" value="#ff3b30">
+
+      <button id="clearBtn">Очистить холст</button>
+      <button id="exportBtn">Сохранить изображение</button>
+
+      <div class="muted small">
+        <p><strong>Примечание по приватности:</strong> видео из камеры обрабатывается в браузере — данные не отправляются на сервер. Точность ограничена: плохое освещение, резкие движения головы и слабая камера ухудшают результаты.</p>
+        <p>Если точность низкая — попробуй калибровку (нажми точки), увеличить освещение и сесть ближе к камере.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WebGazer (Brown University) - простой браузерный eye-tracker -->
+  <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+
+  <script>
+    // Основная логика: подключаем webgazer, слушаем gaze, рисуем на canvas.
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const paint = document.getElementById('paint');
+    const overlay = document.getElementById('overlay');
+    const videoPreview = document.getElementById('videoPreview');
+    const ctx = paint.getContext('2d');
+    const ctxOverlay = overlay.getContext('2d');
+
+    const brushSizeEl = document.getElementById('brushSize');
+    const brushSizeLabel = document.getElementById('brushSizeLabel');
+    const colorEl = document.getElementById('color');
+    const smoothEl = document.getElementById('smooth');
+    const smoothLabel = document.getElementById('smoothLabel');
+
+    let running = false;
+    let lastGaze = null;
+    let smoothed = null;
+    let smoothing = parseFloat(smoothEl.value); // 0..1
+    let brushSize = parseInt(brushSizeEl.value);
+
+    brushSizeEl.oninput = () => { brushSize = parseInt(brushSizeEl.value); brushSizeLabel.textContent = brushSize; };
+    colorEl.oninput = () => {};
+    smoothEl.oninput = () => { smoothing = parseFloat(smoothEl.value); smoothLabel.textContent = smoothing; };
+
+    // Автоматическая подгонка canvas к блоку
+    function resizeCanvas() {
+      const r = paint.getBoundingClientRect();
+      paint.width = r.width * devicePixelRatio;
+      paint.height = r.height * devicePixelRatio;
+      overlay.width = paint.width;
+      overlay.height = paint.height;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+      ctxOverlay.scale(devicePixelRatio, devicePixelRatio);
+    }
+    window.addEventListener('resize', () => { resizeCanvas(); });
+    setTimeout(resizeCanvas, 50);
+
+    // Калибровка: расставим 9 точек по экрану и скажем юзеру кликнуть
+    const gridBtns = document.querySelectorAll('.grid-btn');
+    gridBtns.forEach((el, idx) => {
+      el.addEventListener('click', async (e) => {
+        // показываем точку в центре кнопки и сохраняем текущие координаты взгляда как "истина"
+        // webgazer.storeClickEvent - поможет библиотеке ассоциировать изображение глаз с экранной координатой
+        if (!window.webgazer) return;
+        const rect = el.getBoundingClientRect();
+        // отображаем краткую анимацию
+        el.style.background = '#15406b';
+        setTimeout(()=>el.style.background='', 250);
+
+        // координаты центра кнопки (экранные)
+        const centerX = rect.left + rect.width/2;
+        const centerY = rect.top + rect.height/2;
+        // webgazer ожидает объект с x,y (в пикселях окна)
+        try {
+          webgazer.recordScreenPosition(centerX, centerY, 'click');
+          // fallback если нет recordScreenPosition — используем storeClickEvent
+          if (webgazer.storeClickEvent) webgazer.storeClickEvent(centerX, centerY);
+        } catch(e) {
+          if (webgazer.storeClickEvent) webgazer.storeClickEvent(centerX, centerY);
+        }
+      });
+    });
+
+    // старт / стоп
+    startBtn.addEventListener('click', async () => {
+      // Запуск webgazer
+      if (running) return;
+      running = true;
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      try {
+        // Укажем, показывать ли видео превью (можно скрыть)
+        webgazer.setRegression('ridge') // стандартная регрессия
+                .setTracker('clmtrackr') // трекер лицевых точек (по умолчанию)
+                .setGazeListener(function(data, elapsedTime) {
+                   if (!data) return;
+                   // data.x, data.y — координаты взгляда в px относительно окна (window)
+                   handleGaze(data.x, data.y);
+                })
+                .showPredictionPoints(false); // если true — точки webgazer покажет сами
+        await webgazer.begin(); // попросит доступ к камере
+        // Получаем видеопоток, чтобы показать превью
+        const video = webgazer.getVideoElement();
+        if (video) {
+          videoPreview.srcObject = video.srcObject || video.captureStream?.() || null;
+          videoPreview.style.display = 'block';
+        }
+        // скрываем собственную overlay камеры webgazer (если он создаёт элемент)
+        const wg = document.querySelector('#webgazerVideoContainer');
+        if (wg) wg.style.display = 'none';
+      } catch(err) {
+        console.error('Ошибка запуска webgazer:', err);
+        alert('Не удалось получить доступ к камере. Проверь права и попробуй ещё раз.');
+        running = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    });
+
+    stopBtn.addEventListener('click', () => {
+      if (!running) return;
+      running = false;
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      webgazer.pause();
+      // Отключаем превью
+      try {
+        if (videoPreview && videoPreview.srcObject) {
+          const tracks = videoPreview.srcObject.getTracks?.();
+          tracks && tracks.forEach(t=>t.stop && t.stop());
+        }
+      } catch(e) {}
+    });
+
+    // Рисование точки взгляда и "мазка" по холсту
+    function handleGaze(x, y) {
+      // Преобразуем координаты окна в координаты холста
+      const stageRect = paint.getBoundingClientRect();
+      // если вне видимой области — пропустить
+      if (x < stageRect.left || x > stageRect.right || y < stageRect.top || y > stageRect.bottom) {
+        // но отображаем на overlay, где точка находится за пределами холста
+      }
+      const cx = (x - stageRect.left) * (paint.width / (stageRect.width * devicePixelRatio)) ;
+      const cy = (y - stageRect.top)  * (paint.height / (stageRect.height * devicePixelRatio));
+
+      // Сглаживание в screen координатах
+      const gx = (x - stageRect.left);
+      const gy = (y - stageRect.top);
+      if (!smoothed) smoothed = {x: gx, y: gy};
+      smoothed.x = smoothed.x * (1 - smoothing) + gx * smoothing;
+      smoothed.y = smoothed.y * (1 - smoothing) + gy * smoothing;
+
+      // рисуем мазок на основном холсте
+      ctx.beginPath();
+      ctx.fillStyle = colorEl.value;
+      const size = brushSize;
+      ctx.arc(smoothed.x, smoothed.y, size, 0, Math.PI*2);
+      ctx.fill();
+
+      // отрисуем временную "курсоровую" точку на overlay
+      ctxOverlay.clearRect(0,0,overlay.width, overlay.height);
+      ctxOverlay.beginPath();
+      ctxOverlay.fillStyle = colorEl.value;
+      ctxOverlay.globalAlpha = 0.95;
+      ctxOverlay.arc(smoothed.x, smoothed.y, Math.max(8, brushSize/2), 0, Math.PI*2);
+      ctxOverlay.fill();
+      ctxOverlay.globalAlpha = 1;
+    }
+
+    // Кнопки утилит
+    clearBtn.addEventListener('click', () => {
+      ctx.clearRect(0,0,paint.width, paint.height);
+      ctxOverlay.clearRect(0,0,overlay.width, overlay.height);
+    });
+
+    exportBtn.addEventListener('click', () => {
+      // экспорт изображения
+      const link = document.createElement('a');
+      // создаем копию canvas с нужным размером
+      const tmp = document.createElement('canvas');
+      tmp.width = paint.width;
+      tmp.height = paint.height;
+      const tctx = tmp.getContext('2d');
+      // рисуем основной холст (он уже в device pixels)
+      tctx.drawImage(paint, 0, 0);
+      link.download = 'gaze-paint.png';
+      link.href = tmp.toDataURL('image/png');
+      link.click();
+    });
+
+    // Перед закрытием страницы — останавливаем webgazer
+    window.addEventListener('beforeunload', () => { try { webgazer.end(); } catch(e){} });
+
+    // Простая инструкция пользователю для первой калибровки:
+    (function showCalibrationHint(){
+      setTimeout(()=>{
+        alert('Перед запуском: нажми несколько калибровочных точек в правой панели (каждую пару раз), затем нажми "Запустить отслеживание". Хорошее освещение и стабильная голова повышают точность.');
+      }, 500);
+    })();
+
+    // Небольшая защита: если webgazer не загружен
+    if (!window.webgazer) {
+      console.warn('WebGazer не найден — возможно блокируется загрузкой с CDN.');
+    }
+  </script>
+</body>
+</html>
