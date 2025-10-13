@@ -4,127 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Heavens Corporate</title>
-
-    <!-- ИКОНКА В ТАБЕ БРАУЗЕРА -->
-    <link rel="icon" href="https://www.darkheavens.ru/assets/img/19d83c0f-a26a-44ff-9019-ea102827f795-13129162.png" type="image/png">
-
+    <meta name="description" content="Dark Heavens — это корпорация по созданию и продаже телеграм-ботов.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Mmp7STHj41hgutFG4xqKbKlwJ2s1/social-images/social-1760284892198-hd_68c59977cba5c%20(1).jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/Mmp7STHj41hgutFG4xqKbKlwJ2s1/social-images/social-1760284892198-hd_68c59977cba5c%20(1).jpg">
+    <meta property="og:title" content="Dark Heavens Corporate">
+    <meta name="twitter:title" content="Dark Heavens Corporate">
+    <meta property="og:description" content="Dark Heavens — это корпорация по созданию и продаже телеграм-ботов.">
+    <meta name="twitter:description" content="Dark Heavens — это корпорация по созданию и продаже телеграм-ботов.">
+    <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/Mmp7STHj41hgutFG4xqKbKlwJ2s1/uploads/1760284886820-19d83c0f-a26a-44ff-9019-ea102827f795-13129162.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
     <style>
+        :root {
+            --neon-cyan: #00f0ff;
+            --neon-purple: #a855f7;
+            --neon-pink: #ec4899;
+            --dark-bg: #0a0a0a;
+            --dark-card: rgba(20, 20, 20, 0.9);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --glow-cyan: 0 0 30px rgba(0, 240, 255, 0.8);
+            --glow-purple: 0 0 30px rgba(168, 85, 247, 0.8);
+            --glow-pink: 0 0 30px rgba(236, 72, 153, 0.8);
+            --border-radius: 1.5rem;
+            --border-radius-lg: 2rem;
+            --border-radius-xl: 3rem;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Improved Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            color: white;
+            text-align: center;
             position: relative;
+            overflow: hidden;
+            padding: 2rem;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Фиолетовый туман */
-        .fog {
+        .hero::before {
+            content: '';
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.1) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 240, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+            animation: pulse 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-size: 30vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: -1;
+            font-family: 'Space Grotesk', sans-serif;
+            animation: float 20s ease-in-out infinite;
+            text-transform: uppercase;
             pointer-events: none;
-            animation: fogPulse 8s ease-in-out infinite alternate;
-            z-index: 0;
+            text-shadow: 0 0 80px rgba(0, 240, 255, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        @keyframes fogPulse {
-            from { opacity: 0.6; }
-            to { opacity: 0.9; }
-        }
-
-        .container {
+        .hero-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            text-align: center;
-            padding: 30px;
+            z-index: 2;
+            max-width: 1200px;
             width: 100%;
         }
 
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
-            background: linear-gradient(to right, #00f5ff, #00ff80, #9d4edd);
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: neonGlow 2s ease-in-out infinite alternate;
-            font-weight: 800;
-            letter-spacing: -1px;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            text-shadow: var(--glow-cyan);
+            animation: title-glow 4s ease-in-out infinite alternate;
+            letter-spacing: -0.02em;
         }
 
-        @keyframes neonGlow {
-            from { text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff; }
-            to { text-shadow: 0 0 15px #9d4edd, 0 0 30px #9d4edd, 0 0 40px #9d4edd; }
+        .hero-subtitle {
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.4;
         }
 
-        /* БАННЕР — ТОЛЬКО ЭТО ИЗОБРАЖЕНИЕ НА СТРАНИЦЕ */
-        .banner-img {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 18px;
-            margin: 25px auto 50px;
-            box-shadow: 0 0 50px rgba(138, 43, 226, 0.8),
-                        0 0 80px rgba(0, 245, 255, 0.3);
-            animation: bannerGlow 5s ease-in-out infinite alternate;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        @keyframes bannerGlow {
-            from { box-shadow: 0 0 30px rgba(138, 43, 226, 0.6), 0 0 50px rgba(0, 245, 255, 0.2); }
-            to { box-shadow: 0 0 60px rgba(138, 43, 226, 0.9), 0 0 90px rgba(0, 245, 255, 0.4); }
-        }
-
-        .btn-container {
+        .hero-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 4rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
-            position: relative;
-            padding: 18px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2.5rem;
+            border-radius: var(--border-radius);
             text-decoration: none;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: white;
-            text-align: center;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #00f5ff, #00ff80, #9d4edd);
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.4),
-                        0 0 30px rgba(0, 255, 128, 0.3),
-                        0 0 45px rgba(157, 78, 221, 0.2);
+            border: none;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            outline: none;
-            transform-origin: center;
-            z-index: 2;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+            color: var(--dark-bg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            min-width: 220px;
+            justify-content: center;
         }
 
         .btn::before {
@@ -134,9 +186,9 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.8s;
+            border-radius: var(--border-radius);
         }
 
         .btn:hover::before {
@@ -144,194 +196,1125 @@
         }
 
         .btn:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 0 25px rgba(0, 245, 255, 0.7),
-                        0 0 40px rgba(0, 255, 128, 0.6),
-                        0 0 60px rgba(157, 78, 221, 0.5);
-            text-shadow: 0 0 10px #fff;
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(0, 240, 255, 0.5);
+            border-radius: var(--border-radius);
         }
 
-        .btn:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.5),
-                        0 0 20px rgba(0, 255, 128, 0.4),
-                        0 0 30px rgba(157, 78, 221, 0.3);
-            animation: clickEffect 0.3s ease-out;
+        .icon {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
         }
 
-        @keyframes clickEffect {
-            0% { transform: translateY(2px) scale(0.98); }
-            50% { transform: translateY(1px) scale(1.01); }
-            100% { transform: translateY(2px) scale(0.98); }
+        /* Enhanced About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
         }
 
-        .btn:nth-child(odd) {
-            background: linear-gradient(135deg, #00ff80, #9d4edd, #00f5ff);
+        @media (min-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+            }
         }
 
-        .btn:nth-child(even) {
-            background: linear-gradient(135deg, #9d4edd, #00f5ff, #00ff80);
-        }
-
-        .btn span {
+        .about-card {
+            background: var(--dark-card);
+            border-radius: var(--border-radius-xl);
+            padding: 4rem;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            z-index: 2;
+            overflow: hidden;
         }
 
-        .btn:not(:last-child)::after {
+        .about-card::before {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+        }
+
+        .about-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), rgba(168, 85, 247, 0.05), rgba(236, 72, 153, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
             z-index: -1;
         }
 
-        .btn.dev-btn {
-            background: linear-gradient(135deg, #ff00cc, #9d4edd, #00f5ff);
-            animation: devGlow 4s ease-in-out infinite;
+        .about-card:hover::after {
+            opacity: 1;
         }
 
-        @keyframes devGlow {
-            0% { box-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 30px #9d4edd; }
-            50% { box-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc, 0 0 60px #9d4edd; }
-            100% { box-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 30px #9d4edd; }
+        .about-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(0, 240, 255, 0.3);
+            border-radius: var(--border-radius-xl);
         }
 
-        .btn.tiktok-btn {
-            background: linear-gradient(135deg, #ff006e, #9d4edd, #ff00cc);
-            box-shadow: 0 0 15px rgba(255, 0, 110, 0.5),
-                        0 0 30px rgba(255, 0, 110, 0.4),
-                        0 0 45px rgba(157, 78, 221, 0.3);
+        .about-title {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            color: var(--neon-cyan);
         }
 
-        .btn.tiktok-btn:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 110, 0.7),
-                        0 0 40px rgba(255, 0, 110, 0.6),
-                        0 0 55px rgba(157, 78, 221, 0.5);
+        .section-title {
+            text-align: center;
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 5rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            border-radius: 4px;
+        }
+
+        /* Enhanced Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        @media (min-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4rem;
+            }
+        }
+
+        .skill-category {
+            background: var(--dark-card);
+            border-radius: var(--border-radius-xl);
+            padding: 3rem;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow-cyan), 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-radius: var(--border-radius-xl);
+        }
+
+        .skill-category h3 {
+            color: var(--neon-pink);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: var(--glow-pink);
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(50, 50, 50, 0.95));
+            border-radius: var(--border-radius);
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.15);
+            box-shadow: var(--glow-cyan);
+            z-index: 10;
+            border-radius: var(--border-radius);
+        }
+
+        .skill-badge::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-15px);
+            background: rgba(10, 10, 10, 0.98);
+            color: var(--text-light);
+            padding: 1.2rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 100;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .skill-badge:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-8px);
+            border-radius: var(--border-radius);
+        }
+
+        /* Enhanced Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            background: var(--dark-card);
+            border-radius: var(--border-radius-xl);
+            padding: 2.5rem;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 35px 70px rgba(0, 240, 255, 0.4);
+            border-radius: var(--border-radius-xl);
+        }
+
+        .project-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.6));
+        }
+
+        .project-title {
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: rgba(168, 85, 247, 0.25);
+            color: var(--neon-purple);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            margin-top: auto;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            font-size: 1rem;
+        }
+
+        .project-link:hover {
+            color: var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateX(8px);
+            border-radius: var(--border-radius);
+        }
+
+        /* 3D Text Container */
+        .text-3d-container {
+            width: 100%;
+            height: 200px;
+            margin: 3rem 0;
+            position: relative;
+            cursor: grab;
+            border-radius: var(--border-radius);
+        }
+
+        .text-3d-container:active {
+            cursor: grabbing;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(40px);
+            position: relative;
+            margin-top: 6rem;
+            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-purple), var(--neon-pink), transparent);
+            box-shadow: var(--glow-cyan);
+            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
         }
 
         .copyright {
-            margin-top: 80px;
-            padding: 15px 20px;
-            background-color: #1a1a2e;
-            border-radius: 10px;
-            font-size: 1rem;
-            color: #aaa;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
-        /* Адаптивность */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .btn { padding: 15px 20px; font-size: 1rem; }
-            .banner-img { max-width: 450px; }
-            .copyright { font-size: 0.9rem; }
+        /* Enhanced Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateY(0px);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(-20px);
+            }
+        }
+
+        @keyframes title-glow {
+            0% {
+                text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(0, 240, 255, 0.9), 0 0 60px rgba(168, 85, 247, 0.7);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        /* Enhanced Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            border-radius: var(--border-radius);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+            border-radius: var(--border-radius);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--neon-cyan), var(--neon-purple));
+            border-radius: var(--border-radius);
+            border: 2px solid var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--neon-purple), var(--neon-pink));
+            border-radius: var(--border-radius);
         }
     </style>
 </head>
 <body>
-    <div class="fog"></div>
-
-    <div class="container">
-        <h1>Dark Heavens Corporate</h1>
-
-        <!-- БАННЕР — ПРАВИЛЬНОЕ ИЗОБРАЖЕНИЕ -->
-        <img src="https://www.darkheavens.ru/hd_68c59977cba5c.jpg" alt="Dark Heavens Corporate" class="banner-img">
-
-        <div class="btn-container">
-            <!-- Исправлено: Создай своего ИИ агента для телеграм канала -->
-            <a href="https://t.me/Create_AI_agents_bot" class="btn"><span>Создай ИИ агента 🎭</span></a>
-
-            <!-- Исправлено: Угадай число — один бот, не дублируется -->
-            <a href="https://t.me/Guess_number_robot" class="btn"><span>Угадай число 🔢</span></a>
-
-            <!-- Исправлено: Узнай любой айди -->
-            <a href="https://t.me/uid_info_robot" class="btn"><span>Узнай любой айди 🆔</span></a>
-
-            <!-- Исправлено: Кликер | by haker_one → просто "Кликер" -->
-            <a href="https://t.me/DH_clicker_bot" class="btn"><span>Кликер 🖱️</span></a>
-
-            <!-- Исправлено: Сокращатель ссылок -->
-            <a href="https://t.me/SR_Link_ROBOT" class="btn"><span>Сокращатель ссылок 🔗</span></a>
-
-            <!-- Исправлено: Создай inline кнопки в любом чате -->
-            <a href="https://t.me/K_inline_bot" class="btn"><span>Создай inline кнопки ➕</span></a>
-
-            <!-- Исправлено: Голос в текст и наоборот — не "на оборот" -->
-            <a href="https://t.me/DH_Voxity_bot" class="btn"><span>Голос в текст и обратно 🗣️</span></a>
-
-            <!-- Исправлено: Анонимный чат — Endipi_bot — это он -->
-            <a href="https://t.me/Endipi_bot" class="btn"><span>Анонимный чат 💬</span></a>
-
-            <!-- Исправлено: Шахта бот -->
-            <a href="https://t.me/DH_SHAHTA_ROBOT" class="btn"><span>Шахта бот ⛏️</span></a>
-
-            <!-- Исправлено: Botify -->
-            <a href="https://t.me/DH_Botify_bot" class="btn"><span>Botify ✨</span></a>
-
-            <!-- Исправлено: Dark GPT бот -->
-            <a href="https://t.me/Dark_ai_GPT_bot" class="btn"><span>Dark GPT бот 🧠</span></a>
-
-            <!-- Исправлено: Продвижение и накрутка -->
-            <a href="https://t.me/dark_heavens_promotions_bot" class="btn"><span>Продвижение и накрутка 📈</span></a>
-
-            <!-- Исправлено: Умный AI чат с генерацией изображений -->
-            <a href="https://t.me/Noir_AI_bot" class="btn"><span>AI чат + генерация 🎨</span></a>
-
-            <!-- Исправлено: Старый анонимный чат (платно) -->
-            <a href="https://t.me/dark_heavens_anonym_chat_bot" class="btn"><span>Старый анонимный чат 💰</span></a>
-
-            <!-- Исправлено: Dark SIM -->
-            <a href="https://t.me/dark_heavens_sim_bot" class="btn"><span>Dark SIM 📱</span></a>
-
-            <!-- Исправлено: BILLY CLICKS -->
-            <a href="https://t.me/Billy_clicksbot" class="btn"><span>BILLY CLICKS 🎮</span></a>
-
-            <!-- DH GPT APK -->
-            <a href="https://www.darkheavens.ru/Dark_Heavens_GPT.apk" class="btn"><span>DH GPT (APK) 🤖📱</span></a>
-
-            <!-- DH GPT Windows -->
-            <a href="https://goo.su/T8q3ZUb" class="btn"><span>DH GPT (Windows) 🤖💻</span></a>
-
-            <!-- BILLY CLICKS Windows -->
-            <a href="https://goo.su/5juBkU3" class="btn"><span>BILLY CLICKS (Windows) 🤖💻</span></a>
-
-            <!-- Канал Dark Heavens -->
-            <a href="https://t.me/dark_heavens_ru" class="btn"><span>Канал Dark Heavens 📰</span></a>
-
-            <!-- Техподдержка -->
-            <a href="https://t.me/dark_heavens_support_bot" class="btn"><span>ТехПоддержка 🆘</span></a>
-
-            <!-- Разработчик -->
-            <a href="https://t.me/haker_one" class="btn dev-btn"><span>Разработчик 👨‍💻</span></a>
-
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@haker_one" class="btn tiktok-btn"><span>TikTok</span></a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-text">DARK HEAVENS</div>
+        <div class="hero-content">
+            <h1 class="hero-title">Dark Heavens Corporate</h1>
+            <p class="hero-subtitle">Создание инновационных Telegram ботов и эксплуатация передовых технологий в проектах</p>
+            
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    Посмотреть проекты
+                </a>
+                <a href="https://t.me/haker_one" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    Связаться в Telegram
+                </a>
+                <a href="https://playerok.com/profile/hakerone/products" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    Купить на PlayerOK
+                </a>
+                <a href="https://dalink.to/haker_one_onedev" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Поддержать донатом
+                </a>
+                <a href="https://t.me/dark_heavens_ru" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                    Канал Dark Heavens
+                </a>
+                <a href="https://t.me/dark_heavens_support_bot" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    Тех поддержка
+                </a>
+                <a href="https://www.tiktok.com/@haker_one" target="_blank" rel="noopener noreferrer" class="btn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/>
+                        <path d="M9 12v8a4 4 0 0 0 4 4h3"/>
+                        <path d="M9 12h5a4 4 0 0 1 4 4v4"/>
+                    </svg>
+                    TikTok разработчика
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Копирайт -->
-    <div class="copyright">
-        © Dark Heavens Corporate 2025
-    </div>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">О нас</h2>
+        <div class="about-grid">
+            <div class="about-card fade-in">
+                <h3 class="about-title">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="m18 16 4-4-4-4"/>
+                        <path d="m6 8-4 4 4 4"/>
+                        <path d="m14.5 4-5 16"/>
+                    </svg>
+                    Dark DEV Studio
+                </h3>
+                <p><strong>Dark DEV</strong> — это профессиональная студия разработки, специализирующаяся на создании инновационных Telegram-ботов и сторонних скриптов любой сложности.</p>
+                <p>Мы предлагаем как платные, так и бесплатные решения, адаптированные под ваши потребности. От простых утилит до сложных AI-интеграций — наша команда воплощает любые идеи в работающие продукты.</p>
+                <p>Используем передовые технологии и best practices, чтобы создавать надежные, масштабируемые и эффективные решения. Каждый проект — это уникальная разработка с вниманием к деталям и производительности.</p>
+                <p><strong>Технологии:</strong> Python, AI/ML, Telegram Bot API, Node.js, PostgreSQL, Docker</p>
+                <a href="https://t.me/Dark_Atelier" target="_blank" rel="noopener noreferrer" class="btn" style="margin-top: 2rem;">
+                    Перейти в Dark DEV
+                </a>
+            </div>
+            <div class="about-card fade-in">
+                <h3 class="about-title">haker_one - Основатель</h3>
+                <p>Я — основатель <strong>Dark Heavens Corporate</strong> и ведущий разработчик студии <strong>Dark DEV</strong>. Создаю инновационные решения на стыке технологий и креатива.</p>
+                <p><strong>Специализация:</strong> разработка Telegram-ботов, AI-интеграции, автоматизация процессов и создание уникальных цифровых продуктов. Работаю с современным стеком технологий: Python, C++, TypeScript, React и многими другими.</p>
+                <p>За плечами — десятки успешных проектов от простых утилит до сложных систем с искусственным интеллектом. Каждый проект — это возможность создать что-то новое и полезное.</p>
+                <p>Постоянно исследую новые технологии и подходы, чтобы создавать решения, которые опережают время. Эксплуатирую передовые разработки в области AI, чтобы делать проекты умнее и эффективнее.</p>
+                <p><strong>Основные технологии:</strong> Python, Telegram Bot API, AI/ML, FastAPI, PostgreSQL, React</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Навыки & Технологии</h2>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Backend & AI</h3>
+                <div class="skill-badges">
+                    <div class="skill-badge" data-tooltip="Универсальный язык для создания ботов, скриптов и AI-интеграций">Python</div>
+                    <div class="skill-badge" data-tooltip="Асинхронный фреймворк для веб-приложений и API">FastAPI</div>
+                    <div class="skill-badge" data-tooltip="Мощная реляционная база данных с расширенными возможностями">PostgreSQL</div>
+                    <div class="skill-badge" data-tooltip="NoSQL база данных для гибкого хранения данных">MongoDB</div>
+                    <div class="skill-badge" data-tooltip="Искусственный интеллект и машинное обучение">AI/ML</div>
+                    <div class="skill-badge" data-tooltip="OpenAI GPT интеграции">OpenAI API</div>
+                    <div class="skill-badge" data-tooltip="Официальный API для создания Telegram ботов">Telegram Bot API</div>
+                    <div class="skill-badge" data-tooltip="Веб-скрейпинг и автоматизация">Selenium</div>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Frontend & Mobile</h3>
+                <div class="skill-badges">
+                    <div class="skill-badge" data-tooltip="Типизированный JavaScript для более надежного и масштабируемого кода">TypeScript</div>
+                    <div class="skill-badge" data-tooltip="React-фреймворк с SSR и оптимизацией производительности">Next.js</div>
+                    <div class="skill-badge" data-tooltip="Утилитарный CSS-фреймворк для быстрой разработки адаптивных интерфейсов">Tailwind CSS</div>
+                    <div class="skill-badge" data-tooltip="Кроссплатформенная разработка мобильных приложений">React Native</div>
+                    <div class="skill-badge" data-tooltip="Прогрессивный фреймворк для создания пользовательских интерфейсов">Vue.js</div>
+                    <div class="skill-badge" data-tooltip="Веб-компоненты и современный CSS">Web Components</div>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Инструменты & DevOps</h3>
+                <div class="skill-badges">
+                    <div class="skill-badge" data-tooltip="Система контроля версий для эффективной командной разработки">Git</div>
+                    <div class="skill-badge" data-tooltip="Контейнеризация приложений для простого развертывания">Docker</div>
+                    <div class="skill-badge" data-tooltip="Виртуальные машины и облачная инфраструктура">AWS/Google Cloud</div>
+                    <div class="skill-badge" data-tooltip="CI/CD автоматизация">GitHub Actions</div>
+                    <div class="skill-badge" data-tooltip="Мощный редактор кода с богатой экосистемой расширений">VS Code</div>
+                    <div class="skill-badge" data-tooltip="Инструмент для дизайна и прототипирования интерфейсов">Figma</div>
+                    <div class="skill-badge" data-tooltip="Мониторинг и аналитика приложений">Grafana</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Наши Проекты</h2>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🤖</div>
+                <h3 class="project-title">Создай ИИ агента</h3>
+                <p class="project-description">Мощный конструктор AI агентов для Telegram каналов. Создавайте умных помощников с индивидуальными настройками и интеграцией с OpenAI GPT.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenAI API</span>
+                    <span class="tech-tag">Telegram Bot API</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                </div>
+                <a href="https://t.me/Create_AI_agents_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🎯</div>
+                <h3 class="project-title">Угадай число</h3>
+                <p class="project-description">Увлекательная игра с системой рейтингов и достижений. Интеллектуальный подбор сложности и статистика игроков.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Telegram Bot API</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">Game Logic</span>
+                </div>
+                <a href="https://t.me/Guess_number_robot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🆔</div>
+                <h3 class="project-title">Узнай любой айди</h3>
+                <p class="project-description">Утилита для получения ID пользователей, чатов и каналов. Поддержка всех типов Telegram сущностей с кешированием результатов.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Telegram API</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Utility</span>
+                </div>
+                <a href="https://t.me/uid_info_robot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">⚡</div>
+                <h3 class="project-title">Кликер</h3>
+                <p class="project-description">Инкрементальная игра с системой улучшений и глобальным рейтингом. Реализована сложная экономика и баланс игрового процесса.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Game Economy</span>
+                    <span class="tech-tag">Redis</span>
+                </div>
+                <a href="https://t.me/DH_clicker_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🔗</div>
+                <h3 class="project-title">Сокращатель ссылок</h3>
+                <p class="project-description">Сервис сокращения URL с аналитикой переходов. Поддержка кастомных алиасов и QR-кодов для каждого сокращения.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Analytics</span>
+                </div>
+                <a href="https://t.me/SR_Link_ROBOT" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🛠️</div>
+                <h3 class="project-title">Создай inline кнопки</h3>
+                <p class="project-description">Визуальный конструктор inline кнопок для Telegram. Drag-and-drop интерфейс и мгновенный предпросмотр.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Telegram Bot API</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">UI Builder</span>
+                </div>
+                <a href="https://t.me/K_inline_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🎙️</div>
+                <h3 class="project-title">Голос в текст и обратно</h3>
+                <p class="project-description">AI-сервис конвертации голосовых сообщений в текст и синтеза речи. Поддержка множества языков и диалектов.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Speech Recognition</span>
+                    <span class="tech-tag">Text-to-Speech</span>
+                    <span class="tech-tag">AI/ML</span>
+                </div>
+                <a href="https://t.me/DH_Voxity_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">👥</div>
+                <h3 class="project-title">Анонимный чат</h3>
+                <p class="project-description">Анонимные чат-рулетки с системой модерации и фильтрами интересов. Защита от спама и нежелательного контента.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">WebSockets</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Moderation</span>
+                </div>
+                <a href="https://t.me/Endipi_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 9 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">⛏️</div>
+                <h3 class="project-title">Шахта бот</h3>
+                <p class="project-description">Экономическая игра с системой майнинга и торговли. Сложная балансировка ресурсов и система улучшений.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Game Design</span>
+                    <span class="tech-tag">Economy System</span>
+                </div>
+                <a href="https://t.me/DH_SHAHTA_ROBOT" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 10 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">✨</div>
+                <h3 class="project-title">Botify</h3>
+                <p class="project-description">Платформа для создания и управления ботами без программирования. Визуальный конструктор и шаблоны.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">No-Code Platform</span>
+                </div>
+                <a href="https://t.me/DH_Botify_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 11 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🧠</div>
+                <h3 class="project-title">Dark GPT бот</h3>
+                <p class="project-description">Продвинутый AI чат-бот с контекстной памятью и мультимодальными возможностями. Интеграция с последними моделями GPT.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenAI GPT-4</span>
+                    <span class="tech-tag">Context Memory</span>
+                    <span class="tech-tag">Multimodal AI</span>
+                </div>
+                <a href="https://t.me/Dark_ai_GPT_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 12 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">📈</div>
+                <h3 class="project-title">Продвижение и накрутка</h3>
+                <p class="project-description">Сервис SMM продвижения с аналитикой и автоматизацией. Безопасные методы накрутки и мониторинг результатов.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Selenium</span>
+                    <span class="tech-tag">Analytics</span>
+                    <span class="tech-tag">Automation</span>
+                </div>
+                <a href="https://t.me/dark_heavens_promotions_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 13 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🎨</div>
+                <h3 class="project-title">AI чат + генерация</h3>
+                <p class="project-description">Мультимодальный AI с генерацией изображений по описанию. Stable Diffusion + GPT в одном интерфейсе.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Stable Diffusion</span>
+                    <span class="tech-tag">GPT-4</span>
+                    <span class="tech-tag">Image Generation</span>
+                </div>
+                <a href="https://t.me/Noir_AI_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 14 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">📱</div>
+                <h3 class="project-title">Dark SIM</h3>
+                <p class="project-description">Сервис виртуальных номеров для регистраций и верификаций. Глобальное покрытие и автоматическая активация.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">SMS API</span>
+                    <span class="tech-tag">Payment Systems</span>
+                    <span class="tech-tag">Automation</span>
+                </div>
+                <a href="https://t.me/dark_heavens_sim_bot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Project 15 -->
+            <div class="project-card fade-in">
+                <div class="project-icon">🎮</div>
+                <h3 class="project-title">BILLY CLICKS</h3>
+                <p class="project-description">Хардкорная кликер-игра с прокачкой персонажа и PvP режимом. Сложная система скилов и достижений.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Game Mechanics</span>
+                    <span class="tech-tag">PvP System</span>
+                </div>
+                <a href="https://t.me/Billy_clicksbot" target="_blank" rel="noopener noreferrer" class="project-link">
+                    Открыть проект
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="text-3d-container" id="text3d">
+            <!-- 3D text will be rendered here -->
+        </div>
+        <p class="copyright">© 2025 Dark Heavens Corporate. Все права защищены.</p>
+    </footer>
 
     <script>
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                btn.style.animation = 'buttonNeon 2s ease-in-out infinite';
+        // Three.js 3D Text
+        let scene, camera, renderer, textMesh, controls;
+        let isAutoRotating = false;
+        let autoRotateTimeout;
+        
+        function init3DText() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = null;
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / 200, 0.1, 1000);
+            camera.position.z = 12;
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, 200);
+            renderer.setClearColor(0x000000, 0);
+            document.getElementById('text3d').appendChild(renderer.domElement);
+            
+            // Enhanced Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
+            scene.add(ambientLight);
+            
+            const directionalLight1 = new THREE.DirectionalLight(0x00f0ff, 2);
+            directionalLight1.position.set(15, 15, 10);
+            scene.add(directionalLight1);
+            
+            const directionalLight2 = new THREE.DirectionalLight(0xa855f7, 1.5);
+            directionalLight2.position.set(-15, -15, 10);
+            scene.add(directionalLight2);
+            
+            const directionalLight3 = new THREE.DirectionalLight(0xec4899, 1.2);
+            directionalLight3.position.set(0, 15, -10);
+            scene.add(directionalLight3);
+            
+            const pointLight = new THREE.PointLight(0x00f0ff, 3, 100);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+            
+            // Text with enhanced materials
+            const loader = new THREE.FontLoader();
+            loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+                const textGeometry = new THREE.TextGeometry('by haker_one', {
+                    font: font,
+                    size: 1.8,
+                    height: 0.6,
+                    curveSegments: 20,
+                    bevelEnabled: true,
+                    bevelThickness: 0.15,
+                    bevelSize: 0.08,
+                    bevelOffset: 0,
+                    bevelSegments: 12
+                });
+                
+                textGeometry.center();
+                
+                // Advanced material with neon effect
+                const material = new THREE.MeshPhongMaterial({ 
+                    color: 0x00f0ff,
+                    specular: 0xffffff,
+                    shininess: 120,
+                    transparent: true,
+                    opacity: 0.98,
+                    emissive: 0x00aaff,
+                    emissiveIntensity: 0.8
+                });
+                
+                const outlineMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xa855f7,
+                    transparent: true,
+                    opacity: 0.4,
+                    side: THREE.BackSide
+                });
+                
+                textMesh = new THREE.Mesh(textGeometry, material);
+                
+                // Create outline
+                const outlineGeometry = new THREE.TextGeometry('by haker_one', {
+                    font: font,
+                    size: 1.8,
+                    height: 0.6,
+                    curveSegments: 20,
+                    bevelEnabled: true,
+                    bevelThickness: 0.18,
+                    bevelSize: 0.1,
+                    bevelOffset: 0,
+                    bevelSegments: 12
+                });
+                outlineGeometry.center();
+                
+                const outlineMesh = new THREE.Mesh(outlineGeometry, outlineMaterial);
+                outlineMesh.position.z = -0.15;
+                
+                const group = new THREE.Group();
+                group.add(textMesh);
+                group.add(outlineMesh);
+                scene.add(group);
+                
+                // Enhanced controls
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.rotateSpeed = 0.8;
+                controls.enableZoom = false;
+                controls.enablePan = false;
+                controls.minPolarAngle = Math.PI / 6;
+                controls.maxPolarAngle = Math.PI / 1.8;
+                controls.autoRotate = false;
+                
+                // Start auto-rotation initially
+                startAutoRotation();
+                
+                // Enhanced animation
+                function animate() {
+                    requestAnimationFrame(animate);
+                    
+                    if (isAutoRotating && group) {
+                        group.rotation.y += 0.008;
+                        group.rotation.x += 0.004;
+                    }
+                    
+                    controls.update();
+                    renderer.render(scene, camera);
+                }
+                animate();
             });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.animation = 'none';
+            
+            // Handle user interaction
+            function startAutoRotation() {
+                isAutoRotating = true;
+                clearTimeout(autoRotateTimeout);
+                autoRotateTimeout = setTimeout(() => {
+                    isAutoRotating = true;
+                }, 3000);
+            }
+            
+            function stopAutoRotation() {
+                isAutoRotating = false;
+                clearTimeout(autoRotateTimeout);
+            }
+            
+            // Add event listeners for user interaction
+            const container = document.getElementById('text3d');
+            container.addEventListener('mousedown', stopAutoRotation);
+            container.addEventListener('touchstart', stopAutoRotation);
+            container.addEventListener('mouseup', startAutoRotation);
+            container.addEventListener('touchend', startAutoRotation);
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                camera.aspect = window.innerWidth / 200;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, 200);
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            init3DText();
+            
+            // Intersection Observer для анимации появления элементов
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimate = document.querySelectorAll('.fade-in');
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Плавный скролл для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
     </script>
 </body>
 </html>
-
